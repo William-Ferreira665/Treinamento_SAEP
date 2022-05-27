@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SAEP22.Models.Equipamentos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (ViewBag.Perfil == "2")
+{
+    <div class="mt-5 mb-5 d-flex justify-content-between align-items-center flex-wrap">
+        <h4>Equipamentos</h4>
+        <a asp-action="Create" class="btn btn-link">Cadastrar Equipamento</a>
+    </div>
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Equipamento)
+                </td>
+                <td>
+                    <img src="~/image/equipaments/@Html.DisplayFor(modelItem => item.Imagem)" alt="Imagem do equipamento" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="./image/icons/comentario.png" alt="Ícone de comentários" />
+                    </a>
+
+                    @if (ViewBag.Perfil == "2")
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <img src="./image/icons/deletar.png" alt="Ícone de excluir" />
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
